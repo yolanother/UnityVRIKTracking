@@ -4,9 +4,9 @@ using Photon.Pun;
 
 namespace DoubTech.SyntyIntegrations.FinalIK
 {
-    public class PhotonBodyFitter : BodyFitter,
+    public class PhotonBodyFitter : BodyFitter
 #if PUN_2_OR_NEWER
-        IPunObservable
+        , IPunObservable
 #endif
     {
 #if PUN_2_OR_NEWER
