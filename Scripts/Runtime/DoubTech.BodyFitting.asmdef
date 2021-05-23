@@ -1,7 +1,8 @@
 {
     "name": "DoubTech.BodyFitting",
     "references": [
-        "GUID:57c32fc907df0f54e8e6e8f0d2488336"
+        "GUID:57c32fc907df0f54e8e6e8f0d2488336",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
