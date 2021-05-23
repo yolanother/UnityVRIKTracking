@@ -78,8 +78,8 @@ namespace DoubTech.SyntyIntegrations.FinalIK
 
         private void OnValidate()
         {
-            if(!animator) animator = transformManager.GetComponentInChildren<Animator>();
             if (!transformManager) transformManager = GetComponentInChildren<TrackedTransformManager>();
+            if(!animator) animator = GetComponentInChildren<Animator>();
 
             chest = animator.GetBoneTransform(HumanBodyBones.Chest);
             rightLower = animator.GetBoneTransform(HumanBodyBones.RightLowerArm);
@@ -169,7 +169,7 @@ namespace DoubTech.SyntyIntegrations.FinalIK
             }
         }
 
-        private void UpdateScales()
+        protected void UpdateScales()
         {
 
             heightScale = bodyFit.playerHeight / modelHeight;

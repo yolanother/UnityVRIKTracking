@@ -1,3 +1,15 @@
-﻿{
-	"name": "DoubTech.BodyFitting"
+{
+    "name": "DoubTech.BodyFitting",
+    "references": [
+        "GUID:57c32fc907df0f54e8e6e8f0d2488336"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
