@@ -16,12 +16,26 @@ namespace DoubTech.SyntyIntegrations.FinalIK
         [ReadOnly] [SerializeField] private float modelLeftArmLength;
         [ReadOnly] [SerializeField] private float modelRightArmLength;
 
+        [Header("Body Parts")]
+        [SerializeField]
         private Transform chest;
+
+        [SerializeField]
         private Transform rightLower;
+
+        [SerializeField]
         private Transform rightUpper;
+
+        [SerializeField]
         private Transform rightHand;
+
+        [SerializeField]
         private Transform leftLower;
+
+        [SerializeField]
         private Transform leftUpper;
+
+        [SerializeField]
         private Transform leftHand;
 
         [Header("Scales")]
@@ -78,16 +92,18 @@ namespace DoubTech.SyntyIntegrations.FinalIK
 
         private void OnValidate()
         {
+            if (Application.isPlaying) return;
+
             if (!transformManager) transformManager = GetComponentInChildren<TrackedTransformManager>();
             if(!animator) animator = GetComponentInChildren<Animator>();
 
-            chest = animator.GetBoneTransform(HumanBodyBones.Chest);
-            rightLower = animator.GetBoneTransform(HumanBodyBones.RightLowerArm);
-            rightUpper = animator.GetBoneTransform(HumanBodyBones.RightUpperArm).parent;
-            rightHand = animator.GetBoneTransform(HumanBodyBones.RightHand);
-            leftLower = animator.GetBoneTransform(HumanBodyBones.LeftLowerArm);
-            leftUpper = animator.GetBoneTransform(HumanBodyBones.LeftUpperArm).parent;
-            leftHand = animator.GetBoneTransform(HumanBodyBones.LeftHand);
+            if(!chest) chest = animator.GetBoneTransform(HumanBodyBones.Chest);
+            if(!rightLower) rightLower = animator.GetBoneTransform(HumanBodyBones.RightLowerArm);
+            if(!rightUpper) rightUpper = animator.GetBoneTransform(HumanBodyBones.RightUpperArm).parent;
+            if(!rightHand) rightHand = animator.GetBoneTransform(HumanBodyBones.RightHand);
+            if(!leftLower) leftLower = animator.GetBoneTransform(HumanBodyBones.LeftLowerArm);
+            if(!leftUpper) leftUpper = animator.GetBoneTransform(HumanBodyBones.LeftUpperArm).parent;
+            if(!leftHand) leftHand = animator.GetBoneTransform(HumanBodyBones.LeftHand);
 
             if (HasAllComponents && !Application.isPlaying)
             {

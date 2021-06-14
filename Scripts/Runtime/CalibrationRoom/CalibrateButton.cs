@@ -13,12 +13,13 @@ namespace DoubTech.VRIkTracking.CalibrationRoom
         [SerializeField] private float buttonPressSpeed = 3;
         [SerializeField] private int calibrationCountdownSeconds = 5;
         [SerializeField] private TextMeshProUGUI countdown;
-        
+
 
         private Vector3 buttonPressedPosition;
 
         private Vector3 targetPosition;
-        private Vector3 startPosition; 
+        private Vector3 startPosition;
+        private float calibrationTimeout;
 
         private void Start()
         {
@@ -35,9 +36,13 @@ namespace DoubTech.VRIkTracking.CalibrationRoom
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Hit the trigger.");
-            targetPosition = buttonPressedPosition;
-            StartCoroutine(StartCalibration());
+            if (Time.time - calibrationTimeout > calibrationCountdownSeconds)
+            {
+                calibrationTimeout = Time.time;
+                Debug.Log("Hit the trigger.");
+                targetPosition = buttonPressedPosition;
+                StartCoroutine(StartCalibration());
+            }
         }
 
         private IEnumerator StartCalibration()
@@ -46,12 +51,14 @@ namespace DoubTech.VRIkTracking.CalibrationRoom
             Debug.Log("Starting calibration in 5 sec.");
             for (int i = 0; i < calibrationCountdownSeconds; i++)
             {
-                countdown.text = "Calibration will begin in " + (calibrationCountdownSeconds - i) + " seconds.\nHold your hands straight forward.";  
+                calibrationTimeout = Time.time;
+                countdown.text = "Calibration will begin in " + (calibrationCountdownSeconds - i) + " seconds.\nHold your hands straight forward.";
                 yield return new WaitForSeconds(1);
             }
 
             bodyFitter.FitBody();
             countdown.text = text;
+            calibrationTimeout = Time.time;
         }
 
         private void OnTriggerExit(Collider other)
@@ -63,5 +70,5 @@ namespace DoubTech.VRIkTracking.CalibrationRoom
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, targetPosition, Time.deltaTime * buttonPressSpeed);
         }
-    }   
+    }
 }
